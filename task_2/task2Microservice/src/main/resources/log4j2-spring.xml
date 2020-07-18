@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+
+
+        <Property name="LOG_PATTERN">
+            "time":"%d{ISO8601}{UTC}Z","traceID":"%X{traceID}","thread":"[%12.20t]","level":"%-5level","method":%logger{36}.%M()@%L","msg":"%msg"%n
+        </Property>
+
+
+        <Property name="LOG_PATH">
+            logs/application.log
+        </Property>
+
+        <Property name="LOG_PATH_BACK_UP_PATH">
+            logs
+        </Property>
+    </Properties>
+
+    <Loggers>
+
+
+        <Root level="info">
+            <AppenderRef ref="ALLrollingAppender"/>
+            <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+    </Loggers>
+    `
+
+    <Appenders>
+
+
+        <RollingFile name="ALLrollingAppender" fileName="${LOG_PATH}"
+                     filePattern="${LOG_PATH_BACK_UP_PATH}/logfile-all-%d{yyyy-MM-dd HH:mm:ss}.log.gz"
+                     append="true">
+                      
+            <Policies>
+                    
+                <SizeBasedTriggeringPolicy size="20mb"/>
+                           
+            </Policies>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+             
+        </RollingFile>
+
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+
+    </Appenders>
+
+
+</Configuration>

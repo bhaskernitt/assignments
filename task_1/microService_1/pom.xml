@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.bhaskerstreet</groupId>
+    <artifactId>microservice_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>microservice_1</name>
+    <description>demo micro service 1</description>
+
+    <properties>
+        <junit-jupiter.version>5.5.0</junit-jupiter.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>8</java.version>
+        <springboot.version>2.2.6.RELEASE</springboot.version>
+        <swagger.doc.core.version>2.4.0</swagger.doc.core.version>
+        <swagger.doc.ui.version>2.4.0</swagger.doc.ui.version>
+        <junit.platform.version>1.6.2</junit.platform.version>
+        <jacoco.version>0.8.3</jacoco.version>
+        <commons.lang3.version>3.8.1</commons.lang3.version>
+        <wiremock.version>2.27.0</wiremock.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
+
+        <!-- Swagger dependencies -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.doc.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.doc.ui.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <!--<version>1.6.2</version>-->
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- <plugin>
+                 <groupId>org.jacoco</groupId>
+                 <artifactId>jacoco-maven-plugin</artifactId>
+                 <version>${jacoco.version}</version>
+                 <inherited>true</inherited>
+                 <executions>
+                     <execution>
+                         <id>pre-unit-test</id>
+                         <goals>
+                             <goal>prepare-agent</goal>
+                         </goals>
+                         <configuration>
+                             &lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;
+                             <destFile>${project.build.directory}/jacoco.exec</destFile>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>post-unit-test</id>
+                         <phase>test</phase>
+                         <goals>
+                             <goal>report</goal>
+                         </goals>
+                         <configuration>
+                             <excludes>
+                                 <exclude>com/bhaskerstreet/microservice_1/configuration/SwaggerConfig/**</exclude>
+                             </excludes>
+                             <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                             <outputDirectory>${project.build.directory}/site/jacoco
+                             </outputDirectory>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>check</id>
+                         <goals>
+                             <goal>check</goal>
+                         </goals>
+                         <configuration>
+                             &lt;!&ndash; Enforcing minimum code coverage via Jacoco plugin &ndash;&gt;
+                             &lt;!&ndash; This is overall Project coverage configuration &ndash;&gt;
+                             <rules>
+                                 <rule>
+                                     &lt;!&ndash; Future change this to CLASS level check &ndash;&gt;
+                                     <element>BUNDLE</element>
+                                     <limits>
+                                         <limit>
+                                             &lt;!&ndash; Prefer not to change this below CoverageRatio , without proper reason &ndash;&gt;
+                                             <counter>LINE</counter>
+                                             <value>MISSEDCOUNT</value>
+                                             <maximum>0</maximum>
+                                         </limit>
+                                         &lt;!&ndash; Prefer not to change this config , without proper reason &ndash;&gt;
+                                         <limit>
+                                             <counter>BRANCH</counter>
+                                             <value>MISSEDCOUNT</value>
+                                             <maximum>0</maximum>
+                                         </limit>
+                                         &lt;!&ndash; Prefer not to change this config , without proper reason &ndash;&gt;
+                                         <limit>
+                                             <counter>CLASS</counter>
+                                             <value>MISSEDCOUNT</value>
+                                             <maximum>0</maximum>
+                                         </limit>
+
+                                     </limits>
+                                 </rule>
+                             </rules>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>-->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <parallel>all</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
