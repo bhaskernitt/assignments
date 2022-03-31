@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>8</java.version>
-        <springboot.version>2.2.6.RELEASE</springboot.version>
+        <springboot.version>2.5.12</springboot.version>
         <swagger.doc.core.version>2.4.0</swagger.doc.core.version>
         <swagger.doc.ui.version>2.4.0</swagger.doc.ui.version>
         <junit.platform.version>1.6.2</junit.platform.version>
