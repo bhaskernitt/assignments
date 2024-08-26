@@ -19,7 +19,7 @@
         <java.version>1.8</java.version>
         <springboot.version>2.2.6.RELEASE</springboot.version>
         <swagger.doc.core.version>2.4.0</swagger.doc.core.version>
-        <swagger.doc.ui.version>2.4.0</swagger.doc.ui.version>
+        <swagger.doc.ui.version>2.10.0</swagger.doc.ui.version>
         <junit.platform.version>1.6.2</junit.platform.version>
     </properties>
 
